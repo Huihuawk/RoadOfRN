@@ -13,6 +13,7 @@ export default class DetailsScreen extends Component {
                 backgroundColor: navigationOptions.headerTintColor,
             },
             headerTintColor: navigationOptions.headerStyle.backgroundColor,
+            headerBackTitle: null,
         };
     };
 

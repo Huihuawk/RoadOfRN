@@ -4,16 +4,40 @@ import {
     View,
     Text
 } from 'react-native';
+import LogoTitle from '../components/EditTitle';
 
 export default class HomeScreen extends Component {
-    static navigationOptions = {
-        title: '便签',
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: <LogoTitle />,
+            headerRight: (
+                <Button
+                    onPress={navigation.getParam('increaseCount')}
+                    title="+1"
+                    color="#fff"
+                />
+            ),
+        };
+    };
+
+    componentDidMount() {
+        this.props.navigation.setParams({ increaseCount: this._increaseCount });
+    }
+
+    state = {
+        count: 0,
+    };
+
+    _increaseCount = () => {
+        this.setState({ count: this.state.count + 1 });
     };
 
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text>Home Screen</Text>
+                <Text>Count:</Text>
+                <Text style={{ fontSize: 21 }}>{this.state.count}</Text>
                 <Button
                     title="Go to Details"
                     onPress={() => this.props.navigation.navigate('Details', {

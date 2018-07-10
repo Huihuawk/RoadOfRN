@@ -18,3 +18,8 @@ the Road of RN
 - The `navigationOptions` static property can be an object or a function. When it is a function, it is provided with an object with the `navigation` prop, `screenProps`, and `navigationOptions` on it.
 - You can also specify shared `navigationOptions` in the stack navigator configuration when you initialize it. The static property takes precedence over that configuration.
 - [Full source of what we have built so far](https://snack.expo.io/@react-navigation/custom-header-title-component-v2).
+
+#### Header buttons
+- You can set buttons in the header through the `headerLeft` and `headerRight` properties in `navigationOptions`.
+- The back button is fully customizable with `headerLeft`, but if you just want to change the title or image, there are other `navigationOptions` for that &mdash; `headerBackTitle`, `headerTruncatedBackTitle`, and `headerBackImage`.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/header-interacting-with-component-instance).

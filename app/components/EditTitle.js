@@ -3,16 +3,16 @@ import {
     Alert,
     Button,
     View,
+    Image
 } from 'react-native';
 
 export default class LogoTitle extends Component {
     render() {
         return (
-            <View style={{ position: 'absolute', right: 0 }}>
-                <Button
-                    title="编辑"
-                    color="#334d81"
-                    onPress={() => Alert.alert('Button has been pressed!')}
+            <View>
+                <Image
+                    source={require('../assets/img/spiro.png')}
+                    style={{ width: 30, height: 30 }}
                 />
             </View>
         );
