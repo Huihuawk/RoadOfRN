@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
     Platform,
@@ -21,7 +15,10 @@ class HomeScreen extends React.Component {
                 <Text>Home Screen</Text>
                 <Button
                     title="Go to Details"
-                    onPress={() => this.props.navigation.navigate('Details')}
+                    onPress={() => this.props.navigation.navigate('Details', {
+                        itemId: 68,
+                        otherParam: 'otherParams',
+                    })}
                 />
             </View>
         );
@@ -30,12 +27,20 @@ class HomeScreen extends React.Component {
 
 class DetailsScreen extends React.Component {
     render() {
+        const { navigation } = this.props;
+        const itemId = navigation.getParam('itemId', 'NO-ID');
+        const otherParam = navigation.getParam('otherParam', 'some default value');
+
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text>Details Screen</Text>
+                <Text>itemId: {JSON.stringify(itemId)}</Text>
+                <Text>otherParam: {JSON.stringify(otherParam)}</Text>
                 <Button
                     title="Go to Details... again"
-                    onPress={() => this.props.navigation.push('Details')}
+                    onPress={() => this.props.navigation.push('Details', {
+                        itemId: Math.floor(Math.random() * 100),
+                    })}
                 />
                 <Button
                     title="Go to Home"
