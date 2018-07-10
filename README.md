@@ -12,3 +12,9 @@ the Road of RN
 - navigate接受可选的第二个参数，以便将参数传递给要导航到的路由。 例如：`this.props.navigation.navigate('RouteName', {paramName: 'value'})`
 - You can read the params through `this.props.navigation.getParam`
 - As an alternative to getParam, you may use `this.props.navigation.state.params`. It is null if no parameters are specified.
+
+#### Configuring the header bar
+- You can customize the header inside of the `navigationOptions` static property on your screen components. Read the full list of options [in the API reference](stack-navigator.html#navigationoptions-used-by-stacknavigator).
+- The `navigationOptions` static property can be an object or a function. When it is a function, it is provided with an object with the `navigation` prop, `screenProps`, and `navigationOptions` on it.
+- You can also specify shared `navigationOptions` in the stack navigator configuration when you initialize it. The static property takes precedence over that configuration.
+- [Full source of what we have built so far](https://snack.expo.io/@react-navigation/custom-header-title-component-v2).
