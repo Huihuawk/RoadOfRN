@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
 import HomeScreen from './app/containers/Home';
 import DetailsScreen from './app/containers/Details';
+import ModalScreen from './app/components/ModalKe';
 
 
 type Props = {};
@@ -11,7 +12,8 @@ export default class App extends Component<Props> {
     }
 }
 
-const RootStack = createStackNavigator({
+const MainStack = createStackNavigator(
+    {
         Home: {
             screen: HomeScreen,
         },
@@ -31,5 +33,20 @@ const RootStack = createStackNavigator({
                 fontWeight: 'bold',
             },
         },
+    }
+);
+
+const RootStack = createStackNavigator(
+    {
+        Main: {
+            screen: MainStack,
+        },
+        MyModal: {
+            screen: ModalScreen,
+        },
+    },
+    {
+        mode: 'modal',
+        headerMode: 'none',
     }
 );

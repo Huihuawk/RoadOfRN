@@ -17,6 +17,13 @@ export default class HomeScreen extends Component {
                     color="#fff"
                 />
             ),
+            headerLeft: (
+                <Button
+                    onPress={() => navigation.navigate('MyModal')}
+                    title="Modal"
+                    color="#fff"
+                />
+            ),
         };
     };
 
