@@ -7,46 +7,46 @@ import ModalScreen from './app/components/ModalKe';
 
 type Props = {};
 export default class App extends Component<Props> {
-    render() {
-        return <RootStack />;
-    }
+  render() {
+    return <RootStack />;
+  }
 }
 
 const MainStack = createStackNavigator(
-    {
-        Home: {
-            screen: HomeScreen,
-        },
-        Details: {
-            screen: DetailsScreen,
-        },
+  {
+    Home: {
+      screen: HomeScreen,
     },
-    {
-        initialRouteName: 'Home',
-        /* The header config from HomeScreen is now here */
-        navigationOptions: {
-            headerStyle: {
-                backgroundColor: '#334d81',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        },
-    }
+    Details: {
+      screen: DetailsScreen,
+    },
+  },
+  {
+    initialRouteName: 'Home',
+    /* The header config from HomeScreen is now here */
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#334d81',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
 );
 
 const RootStack = createStackNavigator(
-    {
-        Main: {
-            screen: MainStack,
-        },
-        MyModal: {
-            screen: ModalScreen,
-        },
+  {
+    Main: {
+      screen: MainStack,
     },
-    {
-        mode: 'modal',
-        headerMode: 'none',
-    }
+    MyModal: {
+      screen: ModalScreen,
+    },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  }
 );
