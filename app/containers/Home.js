@@ -52,6 +52,18 @@ export default class HomeScreen extends Component {
             otherParam: 'otherParams',
           })}
         />
+        <Button
+          title="Time is A fool"
+          onPress={() => this.props.navigation.navigate('ScrollViewKe', {
+            otherParam: 'Time is A fool',
+          })}
+        />
+        <Button
+          title="Long list"
+          onPress={() => this.props.navigation.navigate('LongListKe', {
+            otherParam: 'LongListKe',
+          })}
+        />
       </View>
     );
   }

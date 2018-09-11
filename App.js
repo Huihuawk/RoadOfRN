@@ -3,6 +3,8 @@ import { createStackNavigator } from 'react-navigation';
 import HomeScreen from './app/containers/Home';
 import DetailsScreen from './app/containers/Details';
 import ModalScreen from './app/components/ModalKe';
+import ScrollViewKe from './app/components/ScrollViewKe';
+import LongListKe from './app/components/LongListKe';
 
 
 type Props = {};
@@ -19,6 +21,12 @@ const MainStack = createStackNavigator(
     },
     Details: {
       screen: DetailsScreen,
+    },
+    ScrollViewKe: {
+      screen: ScrollViewKe,
+    },
+    LongListKe: {
+      screen: LongListKe,
     },
   },
   {
