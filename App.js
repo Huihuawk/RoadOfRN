@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
-import HomeScreen from './app/containers/Home';
-import DetailsScreen from './app/containers/Details';
-import ModalScreen from './app/components/ModalKe';
-import ScrollViewKe from './app/components/ScrollViewKe';
-import LongListKe from './app/components/LongListKe';
+import HomeScreen from './js/containers/Home';
+import DetailsScreen from './js/containers/Details';
+import ModalScreen from './js/components/ModalKe';
+import ScrollViewKe from './js/components/ScrollViewKe';
+import LongListKe from './js/components/LongListKe';
 
 
 type Props = {};
@@ -34,9 +34,8 @@ const MainStack = createStackNavigator(
     /* The header config from HomeScreen is now here */
     navigationOptions: {
       headerStyle: {
-        backgroundColor: '#334d81',
+        backgroundColor: '#e9e9ee',
       },
-      headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
