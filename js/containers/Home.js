@@ -3,11 +3,11 @@ import {
   Screen,
   Image,
   View,
-  ScrollView,
+  GridRow,
   DropDownMenu,
-  Divider,
+  ListView,
   Card,
-  Examples,
+  TouchableOpacity,
   Subtitle,
   Caption,
   NavigationBar,
@@ -15,11 +15,12 @@ import {
   Button,
   Title,
 } from '@shoutem/ui';
-import MemoTitle from '../components/EditTitle';
+import { connect } from 'react-redux';
+import { addMemo, loadMemo } from '../actions/memo';
+import CardMemo from '../components/CardMemo';
 import MMColors from "../common/MMColors";
-import StyleSheet from "../common/MMStyleSheet";
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       header: null,
@@ -40,26 +41,47 @@ export default class HomeScreen extends Component {
           title: "Chrysler",
         },
       ],
+      memoData: '',
     }
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ increaseCount: this._increaseCount });
+    this.init();
   }
 
-  _increaseCount = () => {
-    this.setState({ count: this.state.count + 1 });
+  init = () => {
+    loadMemo()
+      .then((data) => {
+        this.setState({ memoData: data.data });
+        // this.props._loadMemo(data);
+      });
   };
 
+  renderRow(rowData, sectionId, index) {
+    let cellViews = [];
+    if (rowData) {
+      cellViews =
+        // rowData.map((memo, id) => {return (
+        <CardMemo content={rowData} />
+        // );
+      // });
+    }
+
+    return (
+      <GridRow columns={2}>
+        {cellViews}
+        {cellViews}
+      </GridRow>
+    );
+  }
 
   render() {
     const selectedFile = this.state.selectedFile || this.state.tipFile[0];
-
     return (
       <Screen>
         <NavigationBar
-          styleName="inline clear"
-
+          styleName="inline no-border"
+          style={styles}
           centerComponent={
             <DropDownMenu
               styleName="horizontal"
@@ -78,27 +100,62 @@ export default class HomeScreen extends Component {
             </Button>
           }
         />
-        <Divider />
-        <ScrollView key={selectedFile.title}>
-          <Card>
-            <Image
-              styleName="medium-wide"
-              source={{uri: 'https://shoutem.github.io/img/ui-toolkit/examples/image-10.png'}}
-            />
-            <View styleName="content">
-              <Subtitle>Choosing The Right Boutique Hotel For You</Subtitle>
-              <Caption>21 hours ago</Caption>
-            </View>
-
-          </Card>
-        </ScrollView>
+        <ListView
+          data={[1]}
+          renderRow={this.renderRow.bind(this, this.state.memoData)}
+        />
+        <Button
+          style={styles.newMM}
+          styleName="clear"
+          onPress={() => {
+            this.props.navigation.navigate("NewMemo", {
+              refresh: () => {
+                this.init();
+              }
+            })
+          }}
+        >
+          <Icon style={styles.newMM_icon} name="plus-button" />
+        </Button>
       </Screen>
     );
   }
 }
 
 const styles = {
+  componentsContainer: {
+    backgroundColor: "#f2f2f2",
+  },
   horizontalContainer: {
     height: 42,
   },
+  newMM: {
+    right: 30,
+    bottom: 40,
+    position: 'absolute',
+    height: 62,
+    width: 62,
+    borderRadius: 31,
+    backgroundColor: MMColors.yellow,
+  },
+  newMM_icon: {
+    padding: 0,
+    fontSize: 40,
+    width: 62,
+    lineHeight: 62,
+    color: MMColors.white,
+  }
 };
+
+const mapStateToProps = (store) => {
+  return {
+    data: store.data,
+  }
+};
+
+const mapDispatchToProps = dispatch => ({
+  _loadMemo: (data) => dispatch(data)
+});
+
+// export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;

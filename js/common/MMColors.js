@@ -26,7 +26,7 @@ const NAMED_COLORS = {
   blueCharcoal: "rgba(1, 10, 28, 1)",
 
   // the rest
-  yellow: "rgba(246, 253, 55, 1)",
+  yellow: "#f5c343",
   green: "rgba(106, 246, 162, 1)",
   turquoise: "rgba(0, 205, 223, 1)",
   purple: "rgba(144, 63, 199, 1)",

@@ -1,59 +1,35 @@
+"use strict";
+
 import React, { Component } from 'react';
-import { createStackNavigator } from 'react-navigation';
-import HomeScreen from './js/containers/Home';
-import DetailsScreen from './js/containers/Details';
-import ModalScreen from './js/components/ModalKe';
-import ScrollViewKe from './js/components/ScrollViewKe';
-import LongListKe from './js/components/LongListKe';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { persistStore } from 'redux-persist';
+import initStore from './js/store/configureStore';
+import router from './js/router'
 
-
+const Navigator = router.Navigator;
 type Props = {};
+
 export default class App extends Component<Props> {
+  constructor(){
+    super();
+    this.state = {
+      isLoading: true,
+      store: initStore(),
+    }
+  }
+
   render() {
-    return <RootStack />;
+    const persistor = persistStore(this.state.store);
+    if(this.state.isLoading){
+      console.log('loading app');
+    }
+    return (
+      <Provider store={this.state.store}>
+        <PersistGate persistor={persistor}>
+          <Navigator/>
+        </PersistGate>
+      </Provider>
+    );
   }
 }
-
-const MainStack = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-    },
-    Details: {
-      screen: DetailsScreen,
-    },
-    ScrollViewKe: {
-      screen: ScrollViewKe,
-    },
-    LongListKe: {
-      screen: LongListKe,
-    },
-  },
-  {
-    initialRouteName: 'Home',
-    /* The header config from HomeScreen is now here */
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#e9e9ee',
-      },
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-  }
-);
-
-const RootStack = createStackNavigator(
-  {
-    Main: {
-      screen: MainStack,
-    },
-    MyModal: {
-      screen: ModalScreen,
-    },
-  },
-  {
-    mode: 'modal',
-    headerMode: 'none',
-  }
-);
