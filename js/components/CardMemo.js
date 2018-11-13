@@ -22,26 +22,33 @@ import MMColors from "../common/MMColors";
 export default class CardMemo extends Component {
   static propTypes = {
     content: PropTypes.object,
-    // onSwitchColor: PropTypes.func
+    onPressMemo: PropTypes.func,
+    onLongPressMemo: PropTypes.func
   };
 
   render() {
-    const { content } = this.props;
+    const { content, onPressMemo, onLongPressMemo } = this.props;
     return (
-      <TouchableOpacity styleName="flexible">
-        <Card styleName="flexible">
-          <Image
-            styleName="medium-wide"
-            source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }}
-          />
-          <View styleName="content">
-            <Subtitle>{content.text}</Subtitle>
-            <View styleName="horizontal">
-              <Caption styleName="collapsible">{content.date}</Caption>
+      <TouchableOpacity onPress={onPressMemo} onLongPress={onLongPressMemo}>
+          <Card>
+            <Image
+              styleName="medium-wide"
+              source={{ uri: "https://shoutem.github.io/static/getting-started/restaurant-1.jpg" }}
+            />
+            <View styleName="content">
+              <Subtitle>{content.text}</Subtitle>
+              <View styleName="horizontal">
+                <Caption styleName="collapsible">{content.date}</Caption>
+              </View>
             </View>
-          </View>
-        </Card>
+          </Card>
       </TouchableOpacity>
     );
   }
 }
+
+const styles = {
+  backgroundColor: 'red',
+  flexWrap: 'wrap',
+  flexShrink: 0,
+};

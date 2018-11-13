@@ -4,24 +4,25 @@ import local from '../storage';
 
 import * as TYPES from './types';
 
-const addMemo = (memo) => {
-  local.set('memo', memo);
+const addMemo = (key, id, memo) => {
+  local.set(key, { memo, id }, id);
   return {
     type: TYPES.MEMO_ADD,
-    data: memo,
+    data: { memo, id },
+    id,
   }
 };
 
 const loadMemo = () => {
-  return local.get('memo')
-    .then((memo) => {
-      if (memo) {
+  // return local.get('memo')
+    // .then((memo) => {
+    //   if (memo) {
         return {
           type: TYPES.MEMO_LOAD,
-          data: memo,
+          // data: memo,
         }
-      }
-    });
+      // }
+    // });
 };
 
 module.exports = {

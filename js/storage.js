@@ -27,7 +27,7 @@ const local = {
    * @params id  非必传 标识
    *
    * */
-  set(key, data, expires, id) {
+  set(key, data, id, expires) {
     let setValue = JSON.stringify(data);
     if (id) {
       storage.save({
@@ -46,7 +46,7 @@ const local = {
 
   },
   /**
-   * 根据key 或者 key-id的到数据
+   * 根据key 或者 key-id的数据
    * @params key 必传
    * @params id  可为空
    *
@@ -103,7 +103,7 @@ const local = {
   /**
    * 删除单个数据
    * key 必传
-   * @params key 删除kay所对应的数据，必传
+   * @params key 删除key所对应的数据，必传
    *
    * @params id  删除id对应的数据 若删除的数据中有id，则必传
    */
